@@ -57,7 +57,7 @@ void menu(BinTree *bst, int arr[])
 				bst->fill(arr);
 			
 				//print Binary Search Tree
-				bst->printTree();
+				//bst->printTree();
 			}
 			else 
 			{
