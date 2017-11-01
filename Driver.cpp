@@ -47,6 +47,14 @@ void menu(BinTree *bst, int arr[])
 		{
 			//load file function to fill array from csv
 			loadFile(arr);
+			
+			for (int index = 0; index < 50; index++)
+			{
+				std::cout << arr[index] << " " << std::flush;
+			}
+			
+			std::cout << std::endl;
+			
 		}
 		else if (input == "2")
 		{
@@ -57,7 +65,7 @@ void menu(BinTree *bst, int arr[])
 				bst->fill(arr);
 			
 				//print Binary Search Tree
-				//bst->printTree();
+				bst->printTree();
 			}
 			else 
 			{
