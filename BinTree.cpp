@@ -29,7 +29,6 @@ void BinTree::fill(int arr[])
 	{
 		int j = arr[index];
 		
-		std::cout << "starting fill" << std::endl;
 		this->insert(j, this->root);		
 	}
 }
@@ -85,6 +84,7 @@ void BinTree::printTree()
 
 void BinTree::print(Node *j)
 {
+	int num = j->number;
 	
 	if (j == NULL)
 	{
@@ -101,10 +101,10 @@ void BinTree::print(Node *j)
 		
 	for (int i = 0; i < (sp * 2); i++)
 	{
-		space = space + " ";
+		space = space + "  ";
 	}
 		
-	std::cout << space << j->number << std::cout;
+	std::cout << space << num << std::endl;
 	
 	if (j->left != NULL)
 	{
