@@ -24,7 +24,6 @@ class BinTree
 		};
 		
 		//iterator 
-		Node *itr;
 		Node *root;
 		
 		
@@ -35,13 +34,13 @@ class BinTree
 		
 		void fill(int []);
 		
-		void insert(int i);
+		void insert(int i, Node *p);
 		
 		void clear();
 		
 		void printTree();
 		
-		void print(Node *p);
+		void print(Node *j);
 		
 };
 

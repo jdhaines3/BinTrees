@@ -11,14 +11,14 @@
 
 BinTree::Node::Node(int num, int dpth)
 {
-	this->number = number;
+	this->number = num;
 	this->depth = dpth;
+	this->left = NULL;
+	this->right = NULL;
 }
 
 BinTree::BinTree()
 {
-	this->root = NULL;
-	this->itr = NULL;
 }
 
 void BinTree::fill(int arr[])
@@ -29,45 +29,43 @@ void BinTree::fill(int arr[])
 	{
 		int j = arr[index];
 		
-		insert(j);
-		this->itr = root;
+		std::cout << "starting fill" << std::endl;
+		this->insert(j, this->root);		
 	}
 }
 
-void BinTree::insert(int data)
+void BinTree::insert(int data, Node *p)
 {
 	if (this->root == NULL)
 	{
-		Node * temp = new Node(data, 0);
+		BinTree::Node * temp = new Node(data, 0);
 		this->root = temp;
 	}
-	else if (this->itr->number == data)
+	else if (p->number == data)
 	{
 	}
-	else if (data < this->itr->number)
+	else if (data < p->number)
 	{
-		if (this->itr->left == NULL)
+		if (p->left == NULL)
 		{
-			Node * newNode = new Node(data, this->itr->depth + 1);
+			BinTree::Node * newNode = new Node(data, p->depth + 1);
+			p->left = newNode;
 		}
 		else 
-		{
-			this->itr = this->itr->left;
-			
-			insert(data);
+		{	
+			this->insert(data, p->left);
 		}
 	}
-	else if (data > this->itr->number)
+	else if (data > p->number)
 	{
-		if (this->itr->right == NULL)
+		if (p->right == NULL)
 		{
-			Node * newNode = new Node(data, this->itr->depth + 1);
+			BinTree::Node * nNode = new Node(data, p->depth + 1);
+			p->right = nNode;
 		}
 		else
-		{
-			this->itr = this->itr->right;
-			
-			insert(data);
+		{	
+			this->insert(data, p->right);
 		}
 	}
 	else
@@ -85,33 +83,32 @@ void BinTree::printTree()
 	print(this->root);
 }
 
-void BinTree::print(Node *p)
+void BinTree::print(Node *j)
 {
-	this->itr = p;
 	
-	if (this->itr == NULL)
+	if (j == NULL)
 	{
 		return;
 	}
 	
-	if (this->itr->right != NULL)
+	if (j->right != NULL)
 	{
-		print(this->itr->right);
+		print(j->right);
 	}
 	
 	std::string space = "";
-	int sp = this->itr->depth;
+	int sp = j->depth;
 		
 	for (int i = 0; i < (sp * 2); i++)
 	{
 		space = space + " ";
 	}
 		
-	std::cout << space << this->itr->number << std::cout;
+	std::cout << space << j->number << std::cout;
 	
-	if (this->itr->left != NULL)
+	if (j->left != NULL)
 	{
-		print(this->itr->left);
+		print(j->left);
 	}
 }
 
