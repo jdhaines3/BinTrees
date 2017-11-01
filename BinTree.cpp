@@ -43,7 +43,6 @@ void BinTree::insert(int data)
 	}
 	else if (this->itr->number == data)
 	{
-		break;
 	}
 	else if (data < this->itr->number)
 	{
