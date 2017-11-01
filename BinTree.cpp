@@ -108,6 +108,9 @@ void BinTree::print(BinTree::Node *p)
 	}
 }
 
-	
+BinTree::~BinTree()
+{
+}
+
 		
 		
