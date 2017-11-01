@@ -85,26 +85,33 @@ void BinTree::printTree()
 	print(this->root);
 }
 
-void BinTree::print(BinTree::Node *p)
+void BinTree::print(Node *p)
 {
-	if (p->right != NULL)
+	this->itr = p;
+	
+	if (this->itr == NULL)
 	{
-		print(p->right);
+		return;
+	}
+	
+	if (this->itr->right != NULL)
+	{
+		print(this->itr->right);
 	}
 	
 	std::string space = "";
-	int sp = p->depth;
+	int sp = this->itr->depth;
 		
 	for (int i = 0; i < (sp * 2); i++)
 	{
 		space = space + " ";
 	}
 		
-	std::cout << space << p->number << std::cout;
+	std::cout << space << this->itr->number << std::cout;
 	
-	if (p->left != NULL)
+	if (this->itr->left != NULL)
 	{
-		print(p->left);
+		print(this->itr->left);
 	}
 }
 
