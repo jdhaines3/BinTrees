@@ -5,14 +5,17 @@
 #Driver cpp file
 #
 
-Tree.exe: BinTree.o Driver.o
-	g++ BinTree.o Driver.o -o Tree.exe
+Tree.exe: AvlTree.o BinTree.o Driver.o
+	g++ AvlTree.o BinTree.o Driver.o -o Tree.exe
 	
 Driver.o: Driver.cpp
 	g++ -c Driver.cpp
 	
 BinTree.o: BinTree.cpp
 	g++ -c BinTree.cpp
+	
+AvlTree.o: AvlTree.cpp
+	g++ -c AvlTree.cpp
 	
 clean:
 	rm -f *.o

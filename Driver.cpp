@@ -8,7 +8,7 @@
 
 //include binary search tree and avl tree; node is included in each and doesn't need to be called in driver
 #include "BinTree.h"
-//#include "AvlTree.h"
+#include "AvlTree.h"
 
 //other includes
 #include <fstream>
@@ -20,11 +20,11 @@
 
 //function prototypes
 void loadFile(int []);
-void menu(BinTree *bst, int []);
+void menu(BinTree *bst, AvlTree *avl, int []);
 
 
 ///---Menu Function---///
-void menu(BinTree *bst, int arr[])
+void menu(BinTree *bst, AvlTree *avl, int arr[])
 {
 	//exit loop variable
 	int keepGoing = 0;
@@ -69,7 +69,7 @@ void menu(BinTree *bst, int arr[])
 		else if (input == "3")
 		{
 			//make sure file was loaded first
-			/*if (arr != NULL)
+			if (arr != NULL)
 			{
 				//fill Binary Search Tree
 				avl->fill(arr);
@@ -82,7 +82,7 @@ void menu(BinTree *bst, int arr[])
 				std::cout << std::endl;
 				std::cout << "No file loaded. Please load the file first, or ensure it exists." << std::endl;
 				std::cout << std::endl;
-			}*/
+			}
 		}
 		else if (input == "4")
 		{
@@ -199,13 +199,13 @@ void menu(BinTree *bst, int arr[])
 	
 	//create new instances of binary search tree and avl tree
 	BinTree * bst = new BinTree();
-	//AvlTree * avl = new AvlTree()
+	AvlTree * avl = new AvlTree()
 	
 	//call menu
-	menu(bst, arr); //avl, arr);
+	menu(bst, avl, arr); //avl, arr);
 	
 	//delete instances and return 0;
 	delete bst;
-	//delete avl;
+	delete avl;
 	return 0;
  }

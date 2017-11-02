@@ -73,10 +73,6 @@ void BinTree::insert(int data, Node *p)
 	}
 }
 
-void BinTree::clear()
-{
-}
-
 void BinTree::printTree()
 {
 	print(this->root);
@@ -101,7 +97,7 @@ void BinTree::print(Node *j)
 		
 	for (int i = 0; i < (sp * 2); i++)
 	{
-		space = space + "  ";
+		space = space + "   ";
 	}
 		
 	std::cout << space << num << std::endl;

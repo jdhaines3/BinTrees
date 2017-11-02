@@ -2,13 +2,13 @@
 * David Haines
 * 362: Data Structures and Algorithms
 * Project 3: Trees
-* Binary Search Tree header file
+* AVL Tree header file
 */
 
-#ifndef BINTREE_H
-#define BINTREE_H
+#ifndef AVLTREE_H
+#define AVLTREE_H
 
-class BinTree
+class AvlTree
 {
 	private:
 		struct Node {
@@ -26,21 +26,23 @@ class BinTree
 		//iterator 
 		Node *root;
 		
-		
 	public:
-		BinTree();
-				
-		~BinTree();
+		AvlTree();
+		
+		~AvlTree();
 		
 		void fill(int []);
+		void insert(data, Node *newNode);
 		
-		void insert(int i, Node *p);
+		void balance(Node *orig, Node *child);
 		
 		void printTree();
+		void print(Node *p);
 		
-		void print(Node *j);
+		void leftRot(Node *n, Node *k);
+		void rightRot(Node *n, Node *k);
 		
+		void doubleLeft(Node *n, Node *k);
+		void doubleRight(Node *n, Node *k);
 };
-
 #endif
-		
