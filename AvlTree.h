@@ -32,12 +32,13 @@ class AvlTree
 		~AvlTree();
 		
 		void fill(int []);
-		void insert(data, Node *newNode);
+		void insert(int data, Node *newNode);
 		
 		void balance(Node *orig, Node *child);
+		int getHeight(Node *node);
 		
 		void printTree();
-		void print(Node *p);
+		void print(Node *p, int space);
 		
 		void leftRot(Node *n, Node *k);
 		void rightRot(Node *n, Node *k);

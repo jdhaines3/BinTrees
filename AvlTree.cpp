@@ -19,6 +19,7 @@ AvlTree::Node::Node(int num, int dpth)
 
 AvlTree::AvlTree()
 {
+	this->root = NULL;
 }
 
 void AvlTree::fill(int arr[])
@@ -41,16 +42,13 @@ void AvlTree::insert(int data, Node *p)
 		AvlTree::Node * temp = new Node(data, 0);
 		this->root = temp;
 	}
-	else if (p->number == data)
-	{
-	}
 	else if (data < p->number)
 	{
 		if (p->left == NULL)
 		{
 			AvlTree::Node * newNode = new Node(data, p->depth + 1);
 			p->left = newNode;
-			this->balance(p, newNode);
+			this->balance(p, p->left);
 		}
 		else 
 		{	
@@ -64,7 +62,7 @@ void AvlTree::insert(int data, Node *p)
 		{
 			AvlTree::Node * nNode = new Node(data, p->depth + 1);
 			p->right = nNode;
-			this->balance(p, nNode);
+			this->balance(p, p->right);
 		}
 		else
 		{	
@@ -76,41 +74,80 @@ void AvlTree::insert(int data, Node *p)
 	{
 		std::cout << "Error" << std::endl;
 	}
+	
+	if (p == this->root)
+	{
+		this->balance(NULL, this->root);
+	}
 }
 
+int AvlTree::getHeight(Node *n) 
+{
+	int ht;
+	if (n == NULL) 
+	{
+		ht = 0;
+	}
+	else if (n != NULL) 
+	{
+		ht = 1;
+		AvlTree::Node *lft = n->left;
+		AvlTree::Node *rt = n->right;
+		
+		int lHeight;
+		lHeight = this->getHeight(lft);
+		int rHeight;
+		rHeight = this->getHeight(rt);
+		
+		if (lHeight > rHeight) 
+		{
+			ht = ht + lHeight;
+		}
+		else if (rHeight > lHeight) 
+		{
+			ht = ht + rHeight;
+		}
+		else 
+		{
+			ht = ht + rHeight;
+		}
+	}
+	return ht;
+}
 
 void AvlTree::balance(Node *par, Node *chld)
 {
-	Node* temp;
-	if((chld->left->depth - chld->right->depth) > 1) 
+	AvlTree::Node *tmp;
+	if((this->getHeight(chld->left) - this->getHeight(chld->right)) > 1) 
 	{
-		temp = chld->left;
-		if (temp->left->depth >= temp->right->depth) 
+		tmp = chld->left;
+		if (this->getHeight(tmp->left) >= this->getHeight(tmp->right)) 
 		{
-			leftRot(par, chld);
+			this->leftRot(par, chld);
 		}
 		else 
 		{
-			doubleLeft(par, child);
+			this->doubleLeft(par, chld);
 		}
 	}
-	else if ((chld->right->depth - chld->left->depth) > 1) 
+	else if ((this->getHeight(chld->right) - this->getHeight(chld->left)) > 1) 
 	{
-		temp = chld->right;
-		if (temp->right->depth >= temp->left->depth) 
+		tmp = chld->right;
+		if (this->getHeight(tmp->right) >= this->getHeight(tmp->left)) 
 		{
-			rightRot(par, chld);
+			this->rightRot(par, chld);
 		}
 		else 
 		{
-			doubleRight(par, chld);
+			this->doubleRight(par, chld);
 		}
 	}
 }
 
 void AvlTree::leftRot(Node *par, Node *chld)
 {
-	Node * temp = chld->left;
+	AvlTree::Node * temp;
+	temp = chld->left;
 	chld->left = temp->right;
 	temp->right = chld;
 	
@@ -118,7 +155,7 @@ void AvlTree::leftRot(Node *par, Node *chld)
 	{
 		this->root = temp;
 	}
-	else if (par != NULL)
+	else
 	{
 		if (par->left == chld)
 		{
@@ -133,7 +170,8 @@ void AvlTree::leftRot(Node *par, Node *chld)
 
 void AvlTree::rightRot(Node *par, Node *chld)
 {
-	Node * temp = chld->right;
+	AvlTree::Node * temp;
+	temp = chld->right;
 	chld->right = temp->left;
 	temp->left = chld;
 	
@@ -141,7 +179,7 @@ void AvlTree::rightRot(Node *par, Node *chld)
 	{
 		this->root = temp;
 	}
-	else if (par != NULL)
+	else
 	{
 		if (par->left == chld)
 		{
@@ -168,36 +206,34 @@ void AvlTree::doubleRight(Node *par, Node *chld)
 
 void AvlTree::printTree()
 {
-	print(this->root);
+	this->print(this->root, 0);
 }
 
-void AvlTree::print(Node *j)
+void AvlTree::print(Node *j, int space)
 {
-	int num = j->number;
 	
 	if (j == NULL)
 	{
 		return;
 	}
 	
+	space += 5;
 	if (j->right != NULL)
 	{
-		print(j->right);
+		this->print(j->right, space);
 	}
 	
-	std::string space = "";
-	int sp = j->depth;
-		
-	for (int i = 0; i < (sp * 2); i++)
+	std::cout << std::endl;
+	
+	for (int i = 5; i < space; i++)
 	{
-		space = space + "   ";
-	}
-		
-	std::cout << space << num << std::endl;
+		std::cout << " ";
+	}	
+	std::cout << j->number << std::endl;
 	
 	if (j->left != NULL)
 	{
-		print(j->left);
+		this->print(j->left, space);
 	}
 }
 

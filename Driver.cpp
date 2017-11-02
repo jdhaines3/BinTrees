@@ -199,7 +199,7 @@ void menu(BinTree *bst, AvlTree *avl, int arr[])
 	
 	//create new instances of binary search tree and avl tree
 	BinTree * bst = new BinTree();
-	AvlTree * avl = new AvlTree()
+	AvlTree * avl = new AvlTree();
 	
 	//call menu
 	menu(bst, avl, arr); //avl, arr);
